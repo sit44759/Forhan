@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise Birthday</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #e9f5fb; /* Light blue background */
+            text-align: center;
+            padding: 50px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #007bff;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .btn-custom {
+            background-color: #ff6f61;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            border: none;
+            margin-top: 20px;
+        }
+
+        .btn-custom:hover {
+            background-color: #ff3b2e;
+        }
+
+        .message {
+            background-color: #f8d7da;
+            padding: 30px;
+            margin-top: 40px;
+            border-radius: 15px;
+            font-size: 1.2em;
+            color: #721c24;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .message h3 {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #d6336c;
+            margin-bottom: 15px;
+        }
+
+        .message p {
+            font-size: 1.2em;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        #countdown {
+            font-size: 3em;
+            color: #ff6f61;
+            margin-top: 30px;
+        }
+
+        /* For background image */
+        .background-img {
+            background-image: url('https://images.unsplash.com/photo-1612521052100-61c083c1dff7?crop=entropy&cs=tinysrgb&fit=max&ixid=M3wzNjY2NXwwfDF8c2VhY3JhfDJ8c2VhY3JofDJ8fHx8fDE2Mjg4MDQ3Nzg&ixlib=rb-1.2.1&q=80&w=1080');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding: 60px;
+            color: white;
+            border-radius: 15px;
+        }
+
+        /* Custom Countdown Timer */
+        #countdown {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        /* Adjusting layout for image and button */
+        .surprise-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .surprise-container img {
+            max-width: 150px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="background-img">
+            <div class="surprise-container">
+                 <h1>🎉 Surprise For Hana! 🎉</h1>
+            </div>
+            <button id="startButton" class="btn btn-custom">Start Surprise</button>
+            <div id="countdown" style="display: none;"></div>
+            <div id="message" class="message" style="display: none;">
+                <!-- Message content will be inserted dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <audio id="birthdaySong" loop>
+        <source src="https://www.example.com/path/to/your-birthday-song.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        const birthdaySong = document.getElementById('birthdaySong');
+        const startButton = document.getElementById('startButton');
+        const countdownDiv = document.getElementById('countdown');
+        const messageDiv = document.getElementById('message');
+
+        startButton.addEventListener('click', function() {
+            startButton.style.display = 'none';
+            countdownDiv.style.display = 'block';
+
+            let countdown = 3;
+            countdownDiv.textContent = countdown;
+
+            const interval = setInterval(() => {
+                countdown--;
+                if (countdown > 0) {
+                    countdownDiv.textContent = countdown;
+                } else {
+                    clearInterval(interval);
+                    countdownDiv.style.display = 'none';
+                    birthdaySong.play();
+                    messageDiv.style.display = 'block';
+                    messageDiv.innerHTML = ` 
+                        <h3>เค้ารักฮาน่ามากๆๆนะ 💖</h3>
+                        <p>เค้าทำเว็บนี้ขึ้นมาเพราะอยากให้ที่รักรู้ว่าเค้ารักเธอจริงๆ เค้าอาจจะทำไม่เก่งก็จริงแต่ก็พยายามทำเว็บนี้ขึ้นมา อาจจะมี AI ช่วยเยอะหน่อย 55555 แต่ทุกๆ ครั้งที่เค้าคิดถึงเธอ มันทำให้เค้าตั้งใจทำสิ่งนี้ให้ดีที่สุด เค้าอยากให้เธอรู้ว่าเค้ารักเธอมากแค่ไหน และพร้อมที่จะเป็นแฟนที่ดี เค้าจะไม่เกเร จะทำให้เธอไว้ใจ และสบายใจว่าเธอสามารถฝากชีวิตไว้กับเค้าได้ ถ้าหากมีอะไรที่เค้าสามารถทำให้เธอมีความสุข เค้าพร้อมจะทำมันอย่างเต็มที่ เพราะเธอคือคนพิเศษของเค้าเสมอ 💖</p>
+                    `;
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
